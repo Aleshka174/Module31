@@ -1,4 +1,3 @@
-
 <?php // For broken web servers: ><pre>
 
 // If you are reading this in your web browser, your server is probably
