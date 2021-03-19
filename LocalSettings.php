@@ -51,15 +51,16 @@ $wgEnotifWatchlist = false; # UPO
 $wgEmailAuthentication = true;
 
 # Database settings
-$dbopts = parse_url(getenv("ClEARDB_DATABASE_URL"));
-$wgDBtype = "mysql";
+$dbopts = parse_url(getenv('DATABASE_URL'));
+$dbopts["path"] = ltrim($dbopts["path"], "/");
+$wgDBtype = "postgres";
 $wgDBserver = $dbopts['host'];
+$wgDBname = $dbopts['path'];
 $wgDBuser = $dbopts['user'];
 $wgDBpassword = $dbopts['pass'];
-$db = substr($dbopts["path"], 1)
-
-mysqli_connect($wgDBserver, $wgDBuser, $wgDBpassword);
-mysqli_select_db($db);
+# Postgres specific settings
+$wgDBport = $dbopts['port'];
+$wgDBmwschema = "mediawiki";
 
 
 # MySQL specific settings
