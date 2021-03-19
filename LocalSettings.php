@@ -50,12 +50,17 @@ $wgEnotifUserTalk = false; # UPO
 $wgEnotifWatchlist = false; # UPO
 $wgEmailAuthentication = true;
 
-## Database settings
+# Database settings
+$dbopts = parse_url(getenv("ClEARDB_DATABASE_URL"));
 $wgDBtype = "mysql";
-$wgDBserver = "localhost";
-$wgDBname = "my_wiki";
-$wgDBuser = "root";
-$wgDBpassword = "";
+$wgDBserver = $dbopts['host'];
+$wgDBuser = $dbopts['user'];
+$wgDBpassword = $dbopts['pass'];
+$db = substr($dbopts["path"], 1)
+
+mysqli_connect($wgDBserver, $wgDBuser, $wgDBpassword);
+mysqli_select_db($db);
+
 
 # MySQL specific settings
 $wgDBprefix = "";
