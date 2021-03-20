@@ -26,10 +26,10 @@ $wgSitename = "Проект№30";
 ## For more information on customizing the URLs
 ## (like /w/index.php/Page_title to /wiki/Page_title) please see:
 ## https://www.mediawiki.org/wiki/Manual:Short_URL
-$wgScriptPath = "/w";
+$wgScriptPath = "";
 
 ## The protocol and server name to use in fully-qualified URLs
-$wgServer = "http://localhost:8080";
+$wgServer = "https://frozen-plains-72755.herokuapp.com/";
 
 ## The URL path to static resources (images, scripts, etc.)
 $wgResourceBasePath = $wgScriptPath;
@@ -51,10 +51,7 @@ $wgEnotifWatchlist = false; # UPO
 $wgEmailAuthentication = true;
 
 # Database settings
-if ($_SERVER['SERVER_NAME'] == "frozen-plains-72755.herokuapp.com") {
-$wgScriptPath = "";
 $dbopts = parse_url(getenv('CLEARDB_DATABASE_URL'));
-$db = substr($dbopts["path"],1);
 $wgDBtype = "mysql";
 $wgDBserver = $dbopts['host'];
 $wgDBname = $dbopts['path'];
@@ -63,17 +60,9 @@ $wgDBpassword = $dbopts['pass'];
 # MySQL specific settings
 $wgDBport = $dbopts['port'];
 $wgDBmwschema = "heroku_12599f565799d46";
-} else {
-	$host = 'localhost';
-	$dbname = 'my_wiki';
-	$username = 'root';
-	$password = '';
-}
 
-#MySQL connect DB
-mysqli_connect($wgDBserver, $wgDBuser, $wgDBpassword);
 
-mysqli_select_db($db);
+
 
 # MySQL specific settings
 $wgDBprefix = "";
