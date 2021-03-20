@@ -51,17 +51,28 @@ $wgEnotifWatchlist = false; # UPO
 $wgEmailAuthentication = true;
 
 # Database settings
-$dbopts = parse_url(getenv('DATABASE_URL'));
-$dbopts["path"] = ltrim($dbopts["path"], "/");
-$wgDBtype = "postgres";
+if ($_SERVER['SERVER_NAME'] == "frozen-plains-72755.herokuapp.com") {
+	$dbopts = parse_url(getenv('CLEARDB_DATABASE_URL'));
+$db = substr($dbopts["path"],1);
+$wgDBtype = "mysql";
 $wgDBserver = $dbopts['host'];
 $wgDBname = $dbopts['path'];
 $wgDBuser = $dbopts['user'];
 $wgDBpassword = $dbopts['pass'];
-# Postgres specific settings
+# MySQL specific settings
 $wgDBport = $dbopts['port'];
-$wgDBmwschema = "mediawiki";
+$wgDBmwschema = "heroku_12599f565799d46";
+} else {
+	$host = 'localhost';
+	$dbname = 'my_wiki';
+	$username = 'root';
+	$password = '';
+}
 
+#MySQL connect DB
+mysqli_connect($wgDBserver, $wgDBuser, $wgDBpassword);
+
+mysqli_select_db($db);
 
 # MySQL specific settings
 $wgDBprefix = "";
