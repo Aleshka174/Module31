@@ -52,7 +52,8 @@ $wgEmailAuthentication = true;
 
 # Database settings
 if ($_SERVER['SERVER_NAME'] == "frozen-plains-72755.herokuapp.com") {
-	$dbopts = parse_url(getenv('CLEARDB_DATABASE_URL'));
+$wgScriptPath = "";
+$dbopts = parse_url(getenv('CLEARDB_DATABASE_URL'));
 $db = substr($dbopts["path"],1);
 $wgDBtype = "mysql";
 $wgDBserver = $dbopts['host'];
@@ -194,3 +195,4 @@ wfLoadExtension( 'WikiEditor' );
 # End of automatically generated settings.
 # Add more configuration options below.
 
+$wgShowExceptionDetails = true;
