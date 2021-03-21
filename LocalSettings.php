@@ -52,6 +52,7 @@ $wgEmailAuthentication = true;
 
 # Database settings
 $dbopts = parse_url(getenv('CLEARDB_DATABASE_URL'));
+$dbopts['path']=ltrim($dbopts['path'], "/");
 $wgDBtype = "mysql";
 $wgDBserver = $dbopts['host'];
 $wgDBname = $dbopts['path'];
